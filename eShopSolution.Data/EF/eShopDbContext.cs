@@ -1,6 +1,7 @@
 ﻿using eShopSolution.Data.Configuration;
 using eShopSolution.Data.Configurations;
 using eShopSolution.Data.Enitities;
+using eShopSolution.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace eShopSolution.Data.EF
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure using Fluent API
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
@@ -28,6 +30,9 @@ namespace eShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             modelBuilder.ApplyConfiguration(new LanguageConfiguration());
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+
+            // DataSeeding
+            modelBuilder.Sees();
             // base.OnModelCreating(modelBuilder);
         }
         public DbSet<Product> Products { set; get; }
