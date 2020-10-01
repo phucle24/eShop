@@ -1,4 +1,5 @@
-﻿using eShopSolution.Data.Enums;
+﻿using eShopSolution.Data.Configurations;
+using eShopSolution.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,5 +19,7 @@ namespace eShopSolution.Data.Enitities
         public int OrderDetailId { set; get; }
 
         public List<OrderDetail> OrderDetails { get; set; }
+
+        public AppUser AppUser { get; set; }
     }
 }
