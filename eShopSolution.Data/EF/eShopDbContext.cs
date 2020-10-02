@@ -32,6 +32,7 @@ namespace eShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             modelBuilder.ApplyConfiguration(new LanguageConfiguration());
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
 
             modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
@@ -60,5 +61,6 @@ namespace eShopSolution.Data.EF
         public DbSet<Transaction> Transactions{ set; get; }
         public DbSet<Cart> Carts{ set; get; }
         public DbSet<AppConfig> AppConfigs{ set; get; }
+        public DbSet<ProductImage> ProductImages{ set; get; }
     }
 }
