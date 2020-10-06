@@ -13,7 +13,6 @@ namespace eShopSolution.ViewModels.Catalog.Products
         public string Details { get; set; }
         public string SeoDescription { get; set; }
         public string SeoTile { get; set; }
-        public int ProductId { get; set; }
         public string LanguageId { get; set; }
         public IFormFile ThumbnailImage { get; set; }
     }
