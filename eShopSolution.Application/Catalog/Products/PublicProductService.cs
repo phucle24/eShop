@@ -20,8 +20,8 @@ namespace eShopSolution.Application.Catalog.Products
         {
             _context = context;
         }
-
-        public async Task<List<ProductViewModel>> GetAll()
+        /*
+        public async Task<List<ProductViewModel>> GetAll(string languageId)
         {
             var query = from p in _context.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
@@ -46,8 +46,8 @@ namespace eShopSolution.Application.Catalog.Products
                            }).ToListAsync();
             return data;
         }
-
-        public async Task<PageResult<ProductViewModel>> GetAllCategoryId(GetPublicProductPagingRequest request)
+        */
+        public async Task<PageResult<ProductViewModel>> GetAllByCategoryId(string languageId,GetPublicProductPagingRequest request)
         {
 
             //1 . Join
@@ -55,6 +55,7 @@ namespace eShopSolution.Application.Catalog.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
                         join pic in _context.ProductInCaregories on p.Id equals pic.ProductId
                         join c in _context.Categories on pic.CategoryId equals c.Id
+                        where pt.LanguageId == languageId
                         select new { p, pic, pt };
             // 2.Filter
 
@@ -91,7 +92,7 @@ namespace eShopSolution.Application.Catalog.Products
             return pagedReult;
         }
 
-        public Task<PageResult<ProductViewModel>> GetAllCategoryId(GetManageProductPagingRequest request)
+        public Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetManageProductPagingRequest request)
         {
             throw new NotImplementedException();
         }
