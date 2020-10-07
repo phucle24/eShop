@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using eShopSolution.Application.Catalog.Products;
 using eShopSolution.ViewModels.Catalog.ProductImages;
 using eShopSolution.ViewModels.Catalog.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,7 @@ namespace eShopSolution.BackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IPublicProductService _publicProductService;
@@ -21,15 +23,6 @@ namespace eShopSolution.BackendApi.Controllers
             _publicProductService = publicProductService;
             _manageProductService = manageProductService;
         }
-        // http://localhost:port/product
-        /*
-        [HttpGet("{languageId}")]
-        public async Task<ActionResult> GetAll(string languageId)
-        {
-            var products = await _publicProductService.GetAll(languageId);
-            return Ok(products);
-        }
-        */
 
         // http://localhost:port/products?pageIndex=1&pageSize=10&CategoryId=1
         [HttpGet("{languageId}")]
