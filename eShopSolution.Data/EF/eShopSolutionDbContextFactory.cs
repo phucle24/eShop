@@ -20,7 +20,7 @@ namespace eShopSolution.Data.EF
             var connectionString = configuration.GetConnectionString("eShopSolutionDb");
 
             var optionsBuilder = new DbContextOptionsBuilder<eShopDbContext>();
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(connectionString, builder => builder.UseRowNumberForPaging());
 
             return new eShopDbContext(optionsBuilder.Options);
         }
