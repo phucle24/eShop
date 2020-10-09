@@ -39,10 +39,11 @@ namespace eShopSolution.Application.System.Users
                 return null;
             }
             var roles = _userManager.GetRolesAsync(user);
-            var claim = new[]
+            var claims = new[]
             {
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Name, request.UserName),
                 new Claim(ClaimTypes.Role, string.Join(";",roles)),
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
@@ -50,7 +51,7 @@ namespace eShopSolution.Application.System.Users
 
             var token = new JwtSecurityToken(_config["Tokens:Issuer"],
               _config["Tokens:Issuer"],
-              null,
+              claims,
               expires: DateTime.Now.AddMinutes(120),
               signingCredentials: credentials);
 
