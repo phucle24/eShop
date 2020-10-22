@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eShopSolution.Application.Catalog.Products;
 using eShopSolution.Application.System.Users;
+using eShopSolution.ViewModels.Catalog.Products;
 using eShopSolution.ViewModels.System.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -43,7 +45,15 @@ namespace eShopSolution.BackendApi.Controllers
             {
                 return BadRequest("Register is unsuccedfull");
             }
+
             return Ok();
+        }
+        //api/users/paging?pageIndex=1&pageSize=10&keyword=?
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery]GetUserPagingRequest request)
+        {
+            var users = await _userService.GetUsersPaging(request);
+            return Ok(users);
         }
     }
 }
