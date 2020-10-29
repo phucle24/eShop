@@ -40,7 +40,7 @@ namespace eShopSolution.BackendApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromForm]ProductCreateRequest request)
+        public async Task<ActionResult> CreateProduct([FromForm]ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
