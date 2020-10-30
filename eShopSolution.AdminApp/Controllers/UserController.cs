@@ -36,19 +36,24 @@ namespace eShopSolution.AdminApp.Controllers
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public async Task<IActionResult> Index(string Keyword, int pageIndex = 1, int pageSize = 10)
+        public async Task<IActionResult> Index(string Keyword, int pageIndex = 1, int pageSize = 2)
         {
-            var sessions = HttpContext.Session.GetString("Token");
             var request = new GetUserPagingRequest()
             {
                 Keyword = Keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize
-
             };
             var data = await _userApiClient.GetUsersPaging(request);
             //var user = User.Identity.Name;
             return View(data.ResultObj);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _userApiClient.GetById(id);
+            return View(result.ResultObj);
         }
 
        
